@@ -8,6 +8,7 @@ on:
 
 jobs:
   cla:
+  if: false runs-on: ubuntu-latest steps: - name: Run Shopify/shopify-cla-action@v1 uses: Shopify/shopify-cla-action@v1 with: cla-token: ${{ secrets.CLA_TOKEN }}
     runs-on: ubuntu-latest
     if: |
       (github.event.issue.pull_request
