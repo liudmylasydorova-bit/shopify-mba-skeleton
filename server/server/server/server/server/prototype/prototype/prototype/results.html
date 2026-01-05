@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Style — OneClick Outfit</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">OneClick Outfit</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="quiz.html">Style Quiz</a>
+        <a href="results.html">My Style</a>
+        <a href="cart.html">Cart</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container results-page">
+    <section>
+      <div class="results-header">
+        <h2>Your Outfits</h2>
+        <div>
+          <a id="editQuiz" class="btn ghost" href="quiz.html">Adjust Preferences</a>
+        </div>
+      </div>
+
+      <div id="outfitGrid" class="outfit-grid">
+        <!-- Outfits inserted here -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© OneClick Outfit</small>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+  <script>
+    // Generate results page
+    Results.render(document.getElementById('outfitGrid'));
+  </script>
+</body>
+</html>
