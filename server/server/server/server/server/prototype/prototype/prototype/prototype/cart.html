@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cart — OneClick Outfit</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">OneClick Outfit</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="quiz.html">Style Quiz</a>
+        <a href="results.html">My Style</a>
+        <a href="cart.html">Cart</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container cart-page">
+    <h2>Your Cart</h2>
+    <div id="cartList"></div>
+    <div class="cart-actions">
+      <button id="checkoutBtn" class="btn primary">Checkout in One Click</button>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© OneClick Outfit</small>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+  <script>
+    Cart.render(document.getElementById('cartList'));
+    document.getElementById('checkoutBtn').addEventListener('click', async function(){
+      const items = Cart.get();
+      if(items.length === 0){ alert('Cart is empty'); return; }
+      // Show preview first
+      const previewResp = await fetch('http://localhost:4000/api/checkout/preview', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ items })
+      }).then(r=>r.json());
+      console.log('Preview', previewResp);
+
+      const resp = await fetch('http://localhost:4000/api/checkout/request', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ items, customer: { email: 'demo@example.com' } })
+      }).then(r=>r.json());
+      console.log('Request response', resp);
+      alert('Order request created (mock). Check console for details.');
+      localStorage.removeItem('oco_cart');
+      Cart.render(document.getElementById('cartList'));
+    });
+  </script>
+</body>
+</html>
