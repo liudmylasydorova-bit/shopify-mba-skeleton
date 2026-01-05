@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Style Quiz — OneClick Outfit</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">OneClick Outfit</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="quiz.html">Style Quiz</a>
+        <a href="results.html">My Style</a>
+        <a href="cart.html">Cart</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container quiz-page">
+    <section class="quiz-card">
+      <h2>Style Quiz</h2>
+      <div id="progress" class="progress-bar"><div id="progressFill"></div></div>
+
+      <div id="questionArea" class="question-area">
+        <!-- Dynamic questions appear here -->
+      </div>
+
+      <div class="quiz-actions">
+        <button id="restartBtn" class="btn ghost" style="display:none">Take Another Quiz</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© OneClick Outfit</small>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+  <script>
+    // Start quiz page
+    Quiz.init(document.getElementById('questionArea'), {
+      onComplete: function(answers){
+        localStorage.setItem('oco_quiz_answers', JSON.stringify(answers));
+        window.location.href = 'results.html';
+      }
+    });
+
+    document.getElementById('restartBtn').addEventListener('click', function(){
+      Quiz.reset();
+      location.reload();
+    });
+  </script>
+</body>
+</html>
