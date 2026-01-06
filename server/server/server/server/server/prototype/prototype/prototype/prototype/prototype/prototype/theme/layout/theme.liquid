@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ page_title }} - OneClick Outfit</title>
+    <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}">
+    <script src="{{ 'scripts.js' | asset_url }}" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="logo">OneClick Outfit</div>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/pages/quiz">Style Quiz</a>
+          <a href="/pages/results">My Style</a>
+          <a href="/cart">Cart</a>
+        </nav>
+      </div>
+    </header>
+
+    <main role="main">{{ content_for_layout }}</main>
+
+    <footer class="site-footer"><div class="container"><small>© OneClick Outfit</small></div></footer>
+  </body>
+</html>

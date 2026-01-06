@@ -1,0 +1,7 @@
+/* Minimal theme CSS (placeholder) */
+body{font-family:Inter,system-ui,Arial;margin:0;background:#FBFAF8;color:#1E2A26}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+.site-header{padding:18px 0}
+.header-inner{display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:700}
+a{color:#9EA7A3;text-decoration:none}
