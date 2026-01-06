@@ -3,7 +3,7 @@ import { shopifyApp } from "@shopify/shopify-app-express";
 import { SQLiteSessionStorage } from "@shopify/shopify-app-session-storage-sqlite";
 import { restResources } from "@shopify/shopify-api/rest/admin/2024-10";
 
-const { BillingInterval, LATEST_API_VERSION } = ShopifyAPI;
+const { BillingInterval } = ShopifyAPI;
 
 const DB_PATH = `${process.cwd()}/database.sqlite`;
 
@@ -20,7 +20,8 @@ const billingConfig = {
 
 const shopify = shopifyApp({
   api: {
-    apiVersion: LATEST_API_VERSION,
+    // Make the API version explicit here so the library can't complain about a missing value.
+    apiVersion: "2024-10",
     restResources,
     future: {
       customerAddressDefaultFix: true,
