@@ -5,50 +5,40 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Outfit One Click — placeholder</title>
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: #ffffff;
-      color: #111827;
-    }
-    .wrap {
-      min-height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      box-sizing: border-box;
-    }
-    .card {
-      max-width: 800px;
-      width: 100%;
-      text-align: center;
-      border: 1px solid #e6e9ef;
-      padding: 32px;
-      border-radius: 8px;
-      box-shadow: 0 6px 20px rgba(16,24,40,0.06);
-    }
-    h1 {
-      margin: 0 0 8px;
-      font-size: 20px;
-      font-weight: 600;
-    }
-    p {
-      margin: 8px 0;
-      color: #6b7280;
-      line-height: 1.4;
-    }
-    small { color: #9ca3af; }
+    html, body { height:100%; margin:0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial; background:#fff; color:#111827; }
+    .wrap { min-height:100%; display:flex; align-items:center; justify-content:center; padding:24px; box-sizing:border-box; }
+    .card { max-width:800px; width:100%; text-align:center; border:1px solid #e6e9ef; padding:32px; border-radius:8px; box-shadow:0 6px 20px rgba(16,24,40,0.06); }
+    h1 { margin:0 0 8px; font-size:20px; font-weight:600; }
+    p { margin:8px 0; color:#6b7280; line-height:1.4; }
+    button { margin-top:12px; padding:8px 14px; border-radius:6px; border:0; background:#111827; color:#fff; cursor:pointer; }
+    #result { margin-top:12px; color:#111827; font-weight:600; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="card">
       <h1>Outfit One Click — placeholder</h1>
-      <p id="app">The frontend has not been built on the server. This placeholder prevents a missing-file error and allows the app to load.</p>
-      <p><small>To replace this, build your frontend and deploy the real frontend/dist/index.html (or add the real build output to this path).</small></p>
+      <p>The frontend has not been built on the server. This placeholder prevents a missing-file error and allows the app to load.</p>
+      <button id="countBtn">Show store product count</button>
+      <div id="result"></div>
+      <p><small>To replace this, build your frontend and deploy the real frontend/dist/index.html.</small></p>
     </div>
   </div>
+
+  <script>
+    const btn = document.getElementById('countBtn');
+    const result = document.getElementById('result');
+    btn.addEventListener('click', async () => {
+      result.textContent = 'Loading…';
+      try {
+        const resp = await fetch('/api/products/count', { credentials: 'same-origin' });
+        if (!resp.ok) throw new Error('Status ' + resp.status);
+        const data = await resp.json();
+        result.textContent = 'Products count: ' + (data.count ?? 'unknown');
+      } catch (err) {
+        result.textContent = 'Request failed: ' + err.message;
+      }
+    });
+  </script>
 </body>
 </html>
